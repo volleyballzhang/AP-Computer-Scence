@@ -1,5 +1,5 @@
 /*Average: 52
-Standard Deviation: 28.69451910419759
+Standard Deviation: 28.69
 Mode: 29
 */
 import java.io.File;
@@ -77,7 +77,9 @@ public class Statistics
         this.findStandardDeviation();
         this.findMode();
         System.out.println("Average: " + average);
-        System.out.println("Standard Deviation: " + standardDeviation);
+        System.out.print("Standard Deviation: ");
+        System.out.printf("%.2f", standardDeviation);
+        System.out.println();
         System.out.println("Mode: " + mode);
     }
 }
