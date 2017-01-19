@@ -1,0 +1,55 @@
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.ArrayList;
+public class Statistics
+{
+    private ArrayList <Double> myNumbers;
+    private double average;
+    public Statistics() {
+        myNumbers = new ArrayList <Double> ();
+    }
+    public void findAverage() {
+        int i = 0;
+        double total = 0;
+        try {
+            //numbers file
+            Scanner in = new Scanner(new File("numbers.txt"));
+            while(in.hasNext()) {
+                //finding the total
+                total += in.nextInt();
+                i++;
+            }
+        }catch(IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        //finding the average
+        average = total / i;
+        System.out.println("Average: " + average);
+    }
+    public void findStandardDeviation() {
+        int a = 0;
+        double s = 0;
+        try {
+            Scanner in = new Scanner(new File("numbers.txt"));
+            while(in.hasNext()) {
+                myNumbers.add(in.nextDouble());
+                a++;
+            }
+        }catch(IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        for(int i = 0; i < myNumbers.size(); i++) {
+            s += (Math.pow((myNumbers.get(i) - average), 2));
+        }
+        double standardDeviation = Math.sqrt(s / (myNumbers.size() - 1));
+        System.out.println("Standard Deviation: " + standardDeviation);
+    }
+    public void findMode() {
+        for(int i = 0; i < myNumbers.size(); i++) {
+            for(int a = 0; a < myNumbers.size(); a++) {
+                
+            }
+        }
+    }
+}
