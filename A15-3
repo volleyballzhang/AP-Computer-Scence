@@ -1,0 +1,83 @@
+/*Average: 52
+Standard Deviation: 28.69451910419759
+Mode: 29
+*/
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.ArrayList;
+public class Statistics
+{
+    private ArrayList <Integer> myNumbers;
+    private long average;
+    private double standardDeviation;
+    private int mode;
+    public Statistics() {
+        myNumbers = new ArrayList <Integer> ();
+    }
+    public long findAverage() {
+        int i = 0;
+        long total = 0;
+        try {
+            //numbers file
+            Scanner in = new Scanner(new File("numbers.txt"));
+            while(in.hasNext()) {
+                //finding the total
+                total += in.nextInt();
+                i++;
+            }
+        }catch(IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        //finding the average
+        average = total / i;
+        return average;
+    }
+    public double findStandardDeviation() {
+        this.findAverage();
+        int a = 0;
+        double s = 0;
+        try {
+            Scanner in = new Scanner(new File("numbers.txt"));
+            while(in.hasNext()) {
+                myNumbers.add(in.nextInt());
+                a++;
+            }
+        }catch(IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        for(int i = 0; i < myNumbers.size(); i++) {
+            s += (Math.pow((myNumbers.get(i) - average), 2));
+        }
+        standardDeviation = Math.sqrt(s / (myNumbers.size() - 1));
+        return standardDeviation;
+    }
+    public int findMode() {
+         mode = 0;
+         int modeCount = 0;        
+         for(int i=0;  i< myNumbers.size();i++){
+             int x = myNumbers.get(i);
+             int tempCount = 1;
+             
+              for(int y : myNumbers){
+               int x2 = myNumbers.get(y);
+                 if( x == x2){
+                     tempCount++; //temo int inceased for every occurence
+                 }
+                 if( tempCount > modeCount){
+                     modeCount = tempCount;
+                     mode = x;
+                 }
+             }
+         }
+         return mode; //returns the mode
+     } 
+    public void printResults() {
+        this.findAverage();
+        this.findStandardDeviation();
+        this.findMode();
+        System.out.println("Average: " + average);
+        System.out.println("Standard Deviation: " + standardDeviation);
+        System.out.println("Mode: " + mode);
+    }
+}
